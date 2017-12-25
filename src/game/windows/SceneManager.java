@@ -14,6 +14,6 @@ public class SceneManager {
 	}
 
 	public static void gotoScene(Parent root) {
-		primaryStage.setScene(new Scene(root, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT, Color.BLACK));
+		primaryStage.setScene(new Scene(root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT, Color.BLACK));
 	}
 }
