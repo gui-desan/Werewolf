@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-abstract class GameScreen extends StackPane {
+public abstract class GameScreen extends StackPane {
 
 	protected HashMap<String, Layer> layers;
 	private GameScreen parent;
