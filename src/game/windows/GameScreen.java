@@ -2,6 +2,7 @@ package game.windows;
 
 import java.util.HashMap;
 
+import game.util.Drawer;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -27,9 +28,9 @@ public abstract class GameScreen extends StackPane {
 	protected void setBackground(String filename) {
 			addLayer("background");
 			Image background = new Image(ClassLoader.getSystemResource(filename).toString());
-	//		drawLayer("background", gc -> {
-	//			gc.drawImage(background, 0, 0, getWidth(), getHeight());
-	//		});
+			draw("background", gc -> {
+				gc.drawImage(background, 0, 0, getWidth(), getHeight());
+			});
 		}
 
 	protected void addLayer(String layerName) {
@@ -66,9 +67,9 @@ public abstract class GameScreen extends StackPane {
 		layers.get(layerName).remove(child);
 	}
 
-//	protected void drawLayer(String layerName, Drawer drawer) {
-//		layers.get(layerName).draw(drawer);
-//	}
+	protected void draw(String layerName, Drawer drawer) {
+		layers.get(layerName).draw(drawer);
+	}
 	
 	protected double getCenterX() {
 		return (Settings.SCENE_WIDTH - getWidth()) / 2;
@@ -104,8 +105,8 @@ public abstract class GameScreen extends StackPane {
 			overlay.getChildren().remove(child);
 		}
 
-//		public void draw(Drawer drawer) {
-//			drawer.draw(gc);
-//		}
+		public void draw(Drawer drawer) {
+			drawer.draw(gc);
+		}
 	}
 }
