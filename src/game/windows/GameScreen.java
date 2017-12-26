@@ -20,14 +20,14 @@ public abstract class GameScreen extends StackPane {
 	public GameScreen(double width, double height) {
 		layers = new HashMap<>();
 		resize(width, height);
+		addLayer("background");
+		sendLayerToBack("background");
 		init();
 	}
 	
 	protected abstract void init();
 
 	protected void setBackground(String filename) {
-		addLayer("background");
-		sendLayerToBack("background");
 		Image background = new Image(ClassLoader.getSystemResource(filename).toString());
 		draw("background", gc -> {
 			gc.drawImage(background, 0, 0, getWidth(), getHeight());
