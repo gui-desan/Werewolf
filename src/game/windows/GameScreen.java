@@ -11,7 +11,7 @@ import javafx.scene.layout.StackPane;
 
 public abstract class GameScreen extends StackPane {
 
-	private HashMap<String, Layer> layers;
+	private final HashMap<String, Layer> layers;
 
 	public GameScreen() {
 		this(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
@@ -22,10 +22,9 @@ public abstract class GameScreen extends StackPane {
 		resize(width, height);
 		addLayer("background");
 		sendLayerToBack("background");
-		init();
 	}
 	
-	protected abstract void init();
+	public abstract void init();
 
 	protected void setBackground(String filename) {
 		Image background = new Image(ClassLoader.getSystemResource(filename).toString());

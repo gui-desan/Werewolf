@@ -9,18 +9,26 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public final class MainMenu extends GameScreen {
-	
+
 	@Override
-	protected void init() {
+	public void init() {
 		setBackground("images/Werewolf_Background.jpg");
 		addLayer("menu");
 		VBox box = new VBox(20);
 		box.setPadding(new Insets(40));
 		box.setAlignment(Pos.BOTTOM_LEFT);
-		box.prefHeightProperty().bind(heightProperty());
+		box.setPrefHeight(getHeight());
 		addChild("menu", box);
 		TextButton newVillageBtn = new TextButton("New Village");
+		newVillageBtn.setOnMouseReleased(e -> {
+			if (newVillageBtn.isHover())
+				setBackground("images/Village_Day.jpg");
+		});
 		TextButton findVillageBtn = new TextButton("Find Village");
+		findVillageBtn.setOnMouseReleased(e -> {
+			if (findVillageBtn.isHover())
+				setBackground("images/Village_Night.jpg");
+		});
 		TextButton quitBtn = new TextButton("Quit");
 		quitBtn.setFillColor(Color.RED, Color.WHITE);
 		quitBtn.setOnMouseReleased(e -> {
