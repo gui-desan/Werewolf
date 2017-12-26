@@ -1,10 +1,32 @@
 package game.scene;
 
+import game.ui.TextButton;
 import game.windows.GameScreen;
+import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public final class MainMenu extends GameScreen {
-
-	public MainMenu() {
+	
+	@Override
+	protected void init() {
 		setBackground("images/Werewolf_Background.jpg");
+		addLayer("menu");
+		VBox box = new VBox(20);
+		box.setPadding(new Insets(40));
+		box.setAlignment(Pos.BOTTOM_LEFT);
+		box.prefHeightProperty().bind(heightProperty());
+		addChild("menu", box);
+		TextButton newVillageBtn = new TextButton("New Village");
+		TextButton findVillageBtn = new TextButton("Find Village");
+		TextButton quitBtn = new TextButton("Quit");
+		quitBtn.setFillColor(Color.RED, Color.WHITE);
+		quitBtn.setOnMouseReleased(e -> {
+			if (quitBtn.isHover())
+				Platform.exit();
+		});
+		box.getChildren().addAll(newVillageBtn, findVillageBtn, quitBtn);
 	}
 }
