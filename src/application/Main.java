@@ -14,6 +14,8 @@ public class Main extends Application {
 		primaryStage.show();
 		primaryStage.setTitle("Werewolf");
 		primaryStage.centerOnScreen();
+		primaryStage.setResizable(false);
+		primaryStage.sizeToScene();
 	}
 	
 	public static void main(String[] args) {

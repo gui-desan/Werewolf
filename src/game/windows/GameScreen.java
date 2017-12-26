@@ -5,15 +5,13 @@ import java.util.HashMap;
 import game.util.Drawer;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public abstract class GameScreen extends StackPane {
 
-	protected HashMap<String, Layer> layers;
-	private GameScreen parent;
+	private HashMap<String, Layer> layers;
 
 	public GameScreen() {
 		this(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
@@ -22,22 +20,25 @@ public abstract class GameScreen extends StackPane {
 	public GameScreen(double width, double height) {
 		layers = new HashMap<>();
 		resize(width, height);
-		parent = this;
+		init();
 	}
 	
+	protected abstract void init();
+
 	protected void setBackground(String filename) {
-			addLayer("background");
-			Image background = new Image(ClassLoader.getSystemResource(filename).toString());
-			draw("background", gc -> {
-				gc.drawImage(background, 0, 0, getWidth(), getHeight());
-			});
-		}
+		addLayer("background");
+		sendLayerToBack("background");
+		Image background = new Image(ClassLoader.getSystemResource(filename).toString());
+		draw("background", gc -> {
+			gc.drawImage(background, 0, 0, getWidth(), getHeight());
+		});
+	}
 
 	protected void addLayer(String layerName) {
 		layers.put(layerName, new Layer());
 		getChildren().add(layers.get(layerName));
 	}
-	
+
 	protected void removeLayer(String layerName) {
 		getChildren().remove(layers.get(layerName));
 		layers.remove(layerName);
@@ -46,23 +47,23 @@ public abstract class GameScreen extends StackPane {
 	protected void showLayer(String layerName) {
 		layers.get(layerName).setVisible(true);
 	}
-	
+
 	protected void hideLayer(String layerName) {
 		layers.get(layerName).setVisible(false);
 	}
-	
+
 	protected void sendLayerToFront(String layerName) {
 		layers.get(layerName).toFront();
 	}
-	
+
 	protected void sendLayerToBack(String layerName) {
 		layers.get(layerName).toBack();
 	}
-	
+
 	protected void addChild(String layerName, Node child) {
 		layers.get(layerName).add(child);
 	}
-	
+
 	protected void removeChild(String layerName, Node child) {
 		layers.get(layerName).remove(child);
 	}
@@ -70,15 +71,15 @@ public abstract class GameScreen extends StackPane {
 	protected void draw(String layerName, Drawer drawer) {
 		layers.get(layerName).draw(drawer);
 	}
-	
+
 	protected double getCenterX() {
 		return (Settings.SCENE_WIDTH - getWidth()) / 2;
 	}
-	
+
 	protected double getCenterY() {
 		return (Settings.SCENE_HEIGHT - getHeight()) / 2;
 	}
-	
+
 	protected void centerOnScreen() {
 		relocate(getCenterX(), getCenterY());
 	}
@@ -87,13 +88,11 @@ public abstract class GameScreen extends StackPane {
 
 		private Canvas canvas;
 		private Pane overlay;
-		private GraphicsContext gc;
 
 		public Layer() {
-			resize(parent.getWidth(), parent.getHeight());
+			resize(GameScreen.this.getWidth(), GameScreen.this.getHeight());
 			overlay = new Pane();
 			canvas = new Canvas(getWidth(), getHeight());
-			gc = canvas.getGraphicsContext2D();
 			getChildren().addAll(canvas, overlay);
 		}
 
@@ -106,7 +105,7 @@ public abstract class GameScreen extends StackPane {
 		}
 
 		public void draw(Drawer drawer) {
-			drawer.draw(gc);
+			drawer.draw(canvas.getGraphicsContext2D());
 		}
 	}
 }
