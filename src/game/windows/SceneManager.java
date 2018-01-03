@@ -3,7 +3,7 @@ package game.windows;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public final class SceneManager {
+public class SceneManager {
 
 	private static Stage primaryStage;
 

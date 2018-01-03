@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-public final class Dialog extends Modal {
+public class Dialog extends Modal {
 
 	protected DialogType dialogType;
 

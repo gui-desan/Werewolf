@@ -2,7 +2,7 @@ package game.windows;
 
 import javafx.scene.text.Font;
 
-public final class Settings {
+public class Settings {
 
 	public static final int SCENE_WIDTH = 960;
 	public static final int SCENE_HEIGHT = 600;

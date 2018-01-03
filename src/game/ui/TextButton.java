@@ -5,7 +5,7 @@ import javafx.scene.effect.Glow;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public final class TextButton extends Text {
+public class TextButton extends Text {
 
 	private Color enterFill, exitFill;
 	

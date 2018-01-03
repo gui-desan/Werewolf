@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public final class Alert extends Modal {
+public class Alert extends Modal {
 
 	private AlertType alertType;
 
