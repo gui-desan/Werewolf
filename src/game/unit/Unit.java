@@ -6,6 +6,11 @@ abstract class Unit {
 	protected Role role;
 	protected Side side;
 	protected Status status;
+	
+	public Unit(String name) {
+		this.name = name;
+		this.status = Status.ALIVE;
+	}
 
 	public String getName() {
 		return name;
@@ -22,6 +27,8 @@ abstract class Unit {
 	public Status getStatus() {
 		return status;
 	}
+	
+	public abstract void handleAction();
 
 	protected enum Side {
 		VILLAGER, WEREWOLF
@@ -32,6 +39,6 @@ abstract class Unit {
 	}
 	
 	protected enum Status {
-		ALIVE, DEAD
+		ALIVE, DEAD, SILENT
 	}
 }
